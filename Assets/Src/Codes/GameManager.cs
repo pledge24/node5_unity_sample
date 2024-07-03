@@ -26,10 +26,10 @@ public class GameManager : MonoBehaviour
     void Awake() {
         instance = this;
         Application.targetFrameRate = targetFrameRate;
+        playerId = (uint)Random.Range(0, 4);
     }
 
     public void GameStart() {
-        playerId = (uint)Random.Range(0, 4);
         player.deviceId = deviceId;
         player.gameObject.SetActive(true);
         hud.SetActive(true);

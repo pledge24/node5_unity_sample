@@ -6083,7 +6083,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7.648148
+  orthographic size: 9.777778
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -12153,7 +12153,7 @@ MonoBehaviour:
   gameTime: 0
   targetFrameRate: 30
   version: 1.0.0
-  latency: 1
+  latency: 1000
   playerId: 0
   deviceId: 
   pool: {fileID: 1572847318}

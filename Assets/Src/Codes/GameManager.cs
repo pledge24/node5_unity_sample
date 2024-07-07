@@ -23,15 +23,18 @@ public class GameManager : MonoBehaviour
     public GameObject hud;
     public GameObject GameStartUI;
 
-    void Awake() {
+    void Awake()
+    {
         instance = this;
         Application.targetFrameRate = targetFrameRate;
-        playerId = (uint)Random.Range(0, 4);
     }
 
-    public void GameStart() {
+    public void GameStart(float x, float y)
+    {
+        //playerId = (uint)Random.Range(0, 4);
         player.deviceId = deviceId;
         player.gameObject.SetActive(true);
+        player.transform.position = new Vector2(x, y);
         hud.SetActive(true);
         GameStartUI.SetActive(false);
         isLive = true;
@@ -40,11 +43,13 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
-    public void GameOver() {
+    public void GameOver()
+    {
         StartCoroutine(GameOverRoutine());
     }
 
-    IEnumerator GameOverRoutine() {
+    IEnumerator GameOverRoutine()
+    {
         isLive = false;
         yield return new WaitForSeconds(0.5f);
 
@@ -52,17 +57,20 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
     }
 
-    public void GameRetry() {
+    public void GameRetry()
+    {
         SceneManager.LoadScene(0);
     }
 
-    public void GameQuit() {
+    public void GameQuit()
+    {
         Application.Quit();
     }
 
     void Update()
     {
-        if (!isLive) {
+        if (!isLive)
+        {
             return;
         }
         gameTime += Time.deltaTime;

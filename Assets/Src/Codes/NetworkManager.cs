@@ -202,15 +202,15 @@ public class NetworkManager : MonoBehaviour
         SendPacket(initialPayload, (uint)Packets.HandlerIds.Init);
     }
 
-    public void SendLocationUpdatePacket(float x, float y)
+    public void SendLocationUpdatePacket(float dirX, float dirY)
     {
-        LocationUpdatePayload locationUpdatePayload = new LocationUpdatePayload
+        DirectionUpdatePayload directionUpdatePayload = new DirectionUpdatePayload
         {
-            x = x,
-            y = y,
+            dirX = dirX,
+            dirY = dirY,
         };
 
-        SendPacket(locationUpdatePayload, (uint)Packets.HandlerIds.LocationUpdate);
+        SendPacket(directionUpdatePayload, (uint)Packets.HandlerIds.LocationUpdate);
     }
 
 
@@ -274,7 +274,7 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
-    public class initialPosition
+    public class receivedPosition
     {
         public float x;
         public float y;
@@ -297,17 +297,20 @@ public class NetworkManager : MonoBehaviour
         {
             if (response.handlerId == 0)
             {
-
-
-                Debug.Log("check1");
-
                 string jsonString = Encoding.UTF8.GetString(response.data);
-                initialPosition pos = JsonUtility.FromJson<initialPosition>(jsonString);
+                receivedPosition pos = JsonUtility.FromJson<receivedPosition>(jsonString);
 
 
-                Debug.Log($"pos: {pos.x}, {pos.x}");
-                GameManager.instance.GameStart(pos.x, pos.y);
-                Debug.Log("check2");
+                Debug.Log($"Init! pos: {pos.x}, {pos.x}");
+                GameManager.instance.GameStart(pos.x, pos.y);              
+            }
+            else if (response.handlerId == 2)
+            {
+                string jsonString = Encoding.UTF8.GetString(response.data);
+                receivedPosition pos = JsonUtility.FromJson<receivedPosition>(jsonString);
+
+                Debug.Log($"UpdateLocation!! pos: {pos.x}, {pos.x}");
+                GameManager.instance.GamePlayerUpdate(pos.x, pos.y);
             }
             ProcessResponseData(response.data);
 

@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
     }
 
+    public void GamePlayerUpdate(float x, float y)
+    {
+        player.updatePosition(x, y);
+    }
     public void GameOver()
     {
         StartCoroutine(GameOverRoutine());

@@ -59,6 +59,16 @@ public class CommonPacket
     public byte[] payload { get; set; }
 }
 
+
+[ProtoContract]
+public class DirectionUpdatePayload
+{
+    [ProtoMember(1, IsRequired = true)]
+    public float dirX { get; set; }
+    [ProtoMember(2, IsRequired = true)]
+    public float dirY { get; set; }
+}
+
 [ProtoContract]
 public class LocationUpdatePayload {
     [ProtoMember(1, IsRequired = true)]

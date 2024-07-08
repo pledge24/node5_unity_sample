@@ -284,7 +284,7 @@ public class NetworkManager : MonoBehaviour
     {
         // 패킷 데이터 처리
         var response = Packets.Deserialize<Response>(packetData);
-        Debug.Log($"HandlerId: {response.handlerId}, responseCode: {response.responseCode}, timestamp: {response.timestamp}, data: {response.data.Length}");
+        // Debug.Log($"HandlerId: {response.handlerId}, responseCode: {response.responseCode}, timestamp: {response.timestamp}, data: {response.data.Length}");
 
         if (response.responseCode != 0 && !uiNotice.activeSelf)
         {
@@ -323,9 +323,8 @@ public class NetworkManager : MonoBehaviour
         {
             // var specificData = Packets.Deserialize<SpecificDataType>(data);
             string jsonString = Encoding.UTF8.GetString(data);
-            //position pos = JsonUtility.FromJson<position>(jsonString);
-            Debug.Log($"Processed SpecificDataType: {jsonString}");
-            // Debug.Log($"position pos: {pos.x}, {pos.y}");
+            // Debug.Log($"Processed SpecificDataType: {jsonString}");
+
         }
         catch (Exception e)
         {
